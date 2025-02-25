@@ -1,8 +1,8 @@
-import time
 
 import allure
 from conftest import *
 from pages.main_page import MainPage
+from pages.personal_acc_page import PersonalAcc
 
 
 class TestMainPage:
@@ -57,7 +57,6 @@ class TestMainPage:
         main_page.main_page_wait_loading()
         main_page.drag_and_drop_ingredient()
         expected_counter_value = "2"
-        time.sleep(2)
         actual_counter_value = main_page.get_value_of_counter(driver)
 
         assert expected_counter_value == actual_counter_value
@@ -65,11 +64,11 @@ class TestMainPage:
     @allure.title("Авторизованный пользователь может оформить заказ")
     def test_place_order(self, driver, user_method, generate_user_data):
         main_page = MainPage(driver)
+        pers_acc = PersonalAcc(driver)
         with allure.step("Создаем пользователя через API метод"):
             user_method.create_user(generate_user_data[0])
-        main_page.create_user_for_order(driver, generate_user_data[1], generate_user_data[2])
+        pers_acc.create_user_for_order(generate_user_data[1], generate_user_data[2])
         main_page.drag_and_drop_ingredient()
-        time.sleep(2)
         main_page.click_on_place_order()
         main_page.wait_for_loading_order_number()
 

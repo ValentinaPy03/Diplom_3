@@ -32,3 +32,4 @@ def generate_user_data():
     yield [user_data, email, password, name]
     user_token = UserMethods().user_token_by_user_data(email, password, name)
     UserMethods().delete_user(user_token)
+

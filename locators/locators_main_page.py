@@ -11,7 +11,7 @@ class LocatorMainPage:
     INGREDIENT = By.XPATH, ".//a[contains(@href, '/ingredient/') and @draggable='true'][1]"
     COUNTER_INGREDIENTS = By.XPATH, ('//a[@href="/ingredient/61c0c5a71d1f82001bdaaa6d"]/div[@class="counter_counter__ZNLkj counter_default__28sqi"]/p')
     TITLE_DETAILES_INGREDIENT = By.XPATH, '//h2[text()="Детали ингредиента"]' #Заголовок окна с деталями ингредиента
-    BUTTON_CLOSE_DETAILES = By.XPATH, '//*[@id="root"]/div/section[1]/div[1]/button' # Крестик на форме с деталями
+    BUTTON_CLOSE_DETAILES = By.XPATH, '//section[@class="Modal_modal_opened__3ISw4 Modal_modal__P3_V5"]/div/button' # Крестик на форме с деталями
     # ингредиента
     BUTTON_PLACE_ORDER = By.XPATH, "//button[contains(text(), 'Оформить заказ')]"  # кнопка Оформить заказ
     BASKET = By.XPATH, ".//ul[contains(@class, 'BurgerConstructor_basket')]"

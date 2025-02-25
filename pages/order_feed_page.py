@@ -1,5 +1,6 @@
 import allure
 
+from locators.locators_main_page import LocatorMainPage
 from locators.locators_order_feed import LocatorsOrderFeed
 from pages.base_page import BasePage
 from pages.main_page import MainPage
@@ -7,6 +8,10 @@ from pages.personal_acc_page import PersonalAcc
 
 
 class OrderFeedPage(BasePage):
+
+    @allure.title('Дождаться кликабельности лого Лента заказов')
+    def wait_for_clickable_logo_feed(self):
+        self.wait_for_clickable_element(LocatorsOrderFeed.LOGO_ORDER_FEED)
 
     @allure.step('Клик на лого Лента заказов')
     def click_on_logo_order_feed(self):
@@ -24,15 +29,11 @@ class OrderFeedPage(BasePage):
     def check_popup_details(self):
         return self.check_element_is_displayed(LocatorsOrderFeed.POP_UP_DETAILS_ORDER)
 
-    @allure.step('Авторизоваться')
-    def create_user_for_order(self, driver, email, password):
-        pers_acc = PersonalAcc(driver)
-        PersonalAcc.create_user_for_order(pers_acc, email, password)
+    # @allure.step('Авторизоваться')
+    # def create_user_for_order(self, driver, email, password):
+    #     pers_acc = PersonalAcc(driver)
+    #     PersonalAcc.create_user_for_order(pers_acc, email, password)
 
-    @allure.step('Оформить заказ и дождаться пояаления номера заказа')
-    def place_order(self, driver):
-        main_page = MainPage(driver)
-        MainPage.place_order(main_page)
 
     @allure.step('Получить номер заказа')
     def get_order_number(self):
@@ -69,6 +70,7 @@ class OrderFeedPage(BasePage):
         number = self.get_text_on_element(LocatorsOrderFeed.NAME_ORDER_IN_HISTORY_ORDERS)
         return number
 
+
     @allure.step('Получить значение Выполнено за все время')
     def get_value_done_all_time(self):
         value = self.get_text_on_element(LocatorsOrderFeed.TITLE_ALL_TIME)
@@ -87,6 +89,7 @@ class OrderFeedPage(BasePage):
     def get_number_order_in_process(self):
         value = self.get_text_on_element(LocatorsOrderFeed.NUMBER_IN_PROCESS)
         return value
+
 
 
 

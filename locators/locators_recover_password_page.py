@@ -12,3 +12,4 @@ class LocatorsRecoverPasswordPage:
     FIELD_KEY = By.XPATH, '//input[@name="name"]' # поле Код из письма на форме восстановления пароля
     HIDE_BUTTON = By.XPATH,  '//div[@class="input__icon input__icon-action"]/*[name()="svg"]'
     SELECTED_FIELD_PASSWORD = By.XPATH, '//div[@class="input pr-6 pl-6 input_type_text input_size_default input_status_active"]'
+    BUTTON_INPUT_PAGE_RECOVER = By.XPATH, '//button[@class="button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa"]'

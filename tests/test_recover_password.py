@@ -1,4 +1,3 @@
-import time
 
 import allure
 
@@ -35,7 +34,7 @@ class TestRecoverPassword:
         assert recover_password.check_field_password()
 
 
-    @allure.title("Тест Rлик по кнопке показать/скрыть пароль делает поле активным")
+    @allure.title("Тест Kлик по кнопке показать/скрыть пароль делает поле активным")
     def test_click_hide_button_to_select_field_password(self, driver):
         email = generate_email_for_recover_password()
         recover_password = RecoverPasswordPage(driver)
@@ -46,8 +45,8 @@ class TestRecoverPassword:
         recover_password.wait_for_title_recover_password()
         recover_password.fill_field_email(email)
         recover_password.click_button_recover()
-        recover_password.wait_clickable_hide_button()
-        time.sleep(2)
+        recover_password.wait_clickable_button_input()
+
         recover_password.click_password_visibility_button()
 
         assert recover_password.check_selected_field_password()

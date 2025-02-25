@@ -67,7 +67,7 @@ class MainPage(BasePage):
 
     @allure.step('Получить значение каунтера ингредиента')
     def get_value_of_counter(self, driver):
-        counter_element = WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located(LocatorMainPage.COUNTER_INGREDIENTS))
+        counter_element = self.wait_for_presence_of_element_located(LocatorMainPage.COUNTER_INGREDIENTS)
         return counter_element.text
 
     @allure.step('Клик на кнопку Оформить заказ')
@@ -86,10 +86,6 @@ class MainPage(BasePage):
     def wait_for_clicable_ingregient(self):
         self.wait_for_clickable_element(LocatorMainPage.INGREDIENT)
 
-    @allure.step('Авторизироваться')
-    def create_user_for_order(self, driver, email, password):
-        pers_acc = PersonalAcc(driver)
-        PersonalAcc.create_user_for_order(pers_acc, email=email, password=password)
 
     @allure.step('Оформить заказ')
     def place_order(self):

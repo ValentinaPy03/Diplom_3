@@ -1,7 +1,6 @@
 import allure
 from conftest import *
 from pages.personal_acc_page import PersonalAcc
-import time
 
 
 class TestPersonalAcc:
@@ -17,7 +16,7 @@ class TestPersonalAcc:
         personal_acc.fill_field_password(generate_user_data[2])
         personal_acc.click_button_input()
         personal_acc.wait_for_button_place_order()
-        time.sleep(3)
+        personal_acc.wait_for_clickable_pers_acc()
         personal_acc.click_button_personal_acc()
         personal_acc.wait_for_personal_acc()
 
@@ -34,7 +33,8 @@ class TestPersonalAcc:
         personal_acc.fill_field_password(generate_user_data[2])
         personal_acc.click_button_input()
         personal_acc.wait_for_button_place_order()
-        time.sleep(2)
+        personal_acc.wait_for_clickable_pers_acc()
+
         personal_acc.click_button_personal_acc()
         personal_acc.click_button_history_orders()
         personal_acc.wait_for_title_download_disappear()
@@ -52,12 +52,13 @@ class TestPersonalAcc:
         personal_acc.fill_field_password(generate_user_data[2])
         personal_acc.click_button_input()
         personal_acc.wait_for_button_place_order()
-        time.sleep(3)
+        personal_acc.wait_for_clickable_pers_acc()
+
         personal_acc.click_button_personal_acc()
-        time.sleep(3)
+        personal_acc.wait_for_clickable_button_logout()
         personal_acc.click_button_logout()
         personal_acc.wait_for_button_input()
 
-        assert personal_acc.check_button_input
+        assert personal_acc.check_button_input()
 
 

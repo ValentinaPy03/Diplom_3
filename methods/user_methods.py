@@ -4,12 +4,12 @@ import allure
 
 class UserMethods:
     @staticmethod
-    @allure.title('Дергаем ручку на создание пользователя')
+    @allure.step('Дергаем ручку на создание пользователя')
     def create_user(body):
         return requests.post(f'{Url.BASE_URL}{Url.CREATE_USER_URL}', json=body)
 
     @staticmethod
-    @allure.title('Узнать токен зарегистрированного пользователя')
+    @allure.step('Узнать токен зарегистрированного пользователя')
     def user_token_by_user_data(email, password, name):
         payload = {
             "email": email,
@@ -21,6 +21,6 @@ class UserMethods:
         return user_access_token.get("accessToken")
 
     @staticmethod
-    @allure.title('Дернуть ручку на удаление пользователя')
+    @allure.step('Дернуть ручку на удаление пользователя')
     def delete_user(token):
         return requests.delete(f'{Url.BASE_URL}{Url.DATA_ABOUT_USER_URL}', headers={'authorization': token})

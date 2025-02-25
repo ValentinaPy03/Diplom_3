@@ -50,6 +50,9 @@ class RecoverPasswordPage(BasePage):
     def wait_clickable_hide_button(self):
         self.wait_for_clickable_element(LocatorsRecoverPasswordPage.HIDE_BUTTON)
 
+    def wait_clickable_button_input(self):
+        self.wait_for_clickable_element(LocatorsRecoverPasswordPage.BUTTON_INPUT_PAGE_RECOVER)
+
     @allure.step("Клик по кнопке показать/скрыть пароль")
     def click_password_visibility_button(self):
         self.click_on_element(LocatorsRecoverPasswordPage.HIDE_BUTTON)

@@ -36,6 +36,9 @@ class PersonalAcc(BasePage):
     def wait_for_button_place_order(self):
         self.wait_for_element(LocatorsPersonalAcc.BUTTON_PLACE_ORDER)
 
+    def wait_for_clickable_button_place_order(self):
+        self.wait_for_clickable_element(LocatorsPersonalAcc.BUTTON_PLACE_ORDER)
+
     def create_user_for_order(self, email, password):
         self.click_personal_acc()
         self.wait_for_button_input()
@@ -79,9 +82,20 @@ class PersonalAcc(BasePage):
     def click_button_logout(self):
         self.click_on_element(LocatorsPersonalAcc.BUTTON_LOGOUT)
 
+    def wait_for_clickable_button_logout(self):
+        self.wait_for_clickable_element(LocatorsPersonalAcc.BUTTON_LOGOUT)
+
     @allure.step("Проверить, что появилась кнопка Войти")
     def check_button_input(self):
         return self.check_element_is_displayed(LocatorsPersonalAcc.BUTTON_INPUT)
+
+    @allure.step("Дождаться кликабельности ЛК")
+    def wait_for_clickable_pers_acc(self):
+        self.wait_for_clickable_element(LocatorsPersonalAcc.BUTTON_PERSONAL_ACC)
+
+    @allure.step("Дождаться загрузки главной страницы")
+    def main_page_wait_loading(self):
+        self.wait_for_element_hide(LocatorsPersonalAcc.OVERLAY)
 
 
 

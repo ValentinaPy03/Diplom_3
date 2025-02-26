@@ -66,7 +66,7 @@ class MainPage(BasePage):
         self.drag_and_drop_on_element(LocatorMainPage.INGREDIENT, LocatorMainPage.BASKET)
 
     @allure.step('Получить значение каунтера ингредиента')
-    def get_value_of_counter(self, driver):
+    def get_value_of_counter(self):
         counter_element = self.wait_for_presence_of_element_located(LocatorMainPage.COUNTER_INGREDIENTS)
         return counter_element.text
 
@@ -85,7 +85,6 @@ class MainPage(BasePage):
     @allure.step("Дождаться кликабельности ингредиента")
     def wait_for_clicable_ingregient(self):
         self.wait_for_clickable_element(LocatorMainPage.INGREDIENT)
-
 
     @allure.step('Оформить заказ')
     def place_order(self):

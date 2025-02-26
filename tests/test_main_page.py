@@ -5,6 +5,7 @@ from pages.main_page import MainPage
 from pages.personal_acc_page import PersonalAcc
 
 
+
 class TestMainPage:
     @allure.title("Тест переход по клику на вкладку Лента заказов")
     def test_going_to_order_feed(self, driver):
@@ -62,11 +63,11 @@ class TestMainPage:
         assert expected_counter_value == actual_counter_value
 
     @allure.title("Авторизованный пользователь может оформить заказ")
-    def test_place_order(self, driver, user_method, generate_user_data):
+    def test_place_order(self, driver, generate_user_data):
         main_page = MainPage(driver)
         pers_acc = PersonalAcc(driver)
         with allure.step("Создаем пользователя через API метод"):
-            user_method.create_user(generate_user_data[0])
+            UserMethods.create_user(generate_user_data[0])
         pers_acc.create_user_for_order(generate_user_data[1], generate_user_data[2])
         main_page.drag_and_drop_ingredient()
         main_page.click_on_place_order()

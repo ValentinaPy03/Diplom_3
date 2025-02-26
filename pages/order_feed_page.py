@@ -1,9 +1,7 @@
 import allure
 
-from locators.locators_main_page import LocatorMainPage
 from locators.locators_order_feed import LocatorsOrderFeed
 from pages.base_page import BasePage
-from pages.main_page import MainPage
 from pages.personal_acc_page import PersonalAcc
 
 
@@ -28,12 +26,6 @@ class OrderFeedPage(BasePage):
     @allure.step('Проверить, что окно с деталями появилось')
     def check_popup_details(self):
         return self.check_element_is_displayed(LocatorsOrderFeed.POP_UP_DETAILS_ORDER)
-
-    # @allure.step('Авторизоваться')
-    # def create_user_for_order(self, driver, email, password):
-    #     pers_acc = PersonalAcc(driver)
-    #     PersonalAcc.create_user_for_order(pers_acc, email, password)
-
 
     @allure.step('Получить номер заказа')
     def get_order_number(self):
@@ -62,14 +54,9 @@ class OrderFeedPage(BasePage):
         return number
 
     @allure.step('Получить номер заказа из истории заказа')
-    def going_on_order_history(self, driver):
-        pers_acc = PersonalAcc(driver)
-        PersonalAcc.going_to_history_order(pers_acc)
-
     def get_number_on_history(self):
         number = self.get_text_on_element(LocatorsOrderFeed.NAME_ORDER_IN_HISTORY_ORDERS)
         return number
-
 
     @allure.step('Получить значение Выполнено за все время')
     def get_value_done_all_time(self):

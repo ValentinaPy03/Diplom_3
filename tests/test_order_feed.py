@@ -1,9 +1,11 @@
-import time
+
 import allure
 from conftest import *
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
 from pages.personal_acc_page import PersonalAcc
+
+
 
 
 class TestOrderFeed:
@@ -17,12 +19,12 @@ class TestOrderFeed:
         assert order_feed.check_popup_details()
 
     @allure.title('Заказы пользователя из раздела «История заказов» отображаются на странице «Лента заказов»')
-    def test_user_orders_mirrored_in_feed(self, driver, user_method, generate_user_data):
+    def test_user_orders_mirrored_in_feed(self, driver, generate_user_data):
         order_feed = OrderFeedPage(driver)
         main_page = MainPage(driver)
         pers_acc = PersonalAcc(driver)
         with allure.step("Создаем пользователя через API метод"):
-            user_method.create_user(generate_user_data[0])
+            UserMethods.create_user(generate_user_data[0])
         pers_acc.create_user_for_order (generate_user_data[1], generate_user_data[2])
 
         main_page.place_order()
@@ -31,7 +33,7 @@ class TestOrderFeed:
         order_feed.wait_for_clickable_logo_feed()
         number_on_feed = order_feed.get_order_name_on_order_feed()
 
-        order_feed.going_on_order_history(driver)
+        pers_acc.going_to_history_order()
         number_on_history = order_feed.get_number_on_history()
 
         assert number_on_feed == number_on_history
@@ -44,11 +46,13 @@ class TestOrderFeed:
         ],
     )
     @allure.title('счётчик Выполнено за сегодня/за все время увеличивается при создании нвоого заказа')
-    def test_counter_all_tme_increases_by_place_new_order(self, driver, user_method, generate_user_data, get_counter_method):
+    def test_counter_all_tme_increases_by_place_new_order(self, driver, generate_user_data, get_counter_method):
         order_feed = OrderFeedPage(driver)
+        pers_acc = PersonalAcc(driver)
+        main_page = MainPage(driver)
         with allure.step("Создаем пользователя через API метод"):
-            user_method.create_user(generate_user_data[0])
-        order_feed.create_user_for_order(driver, generate_user_data[1], generate_user_data[2])
+            UserMethods.create_user(generate_user_data[0])
+        pers_acc.create_user_for_order(generate_user_data[1], generate_user_data[2])
         order_feed.wait_overlay_disappear()
         order_feed.click_on_logo_order_feed()
 
@@ -56,7 +60,7 @@ class TestOrderFeed:
         counter_after = int(get_counter())
 
         order_feed.click_on_logo_constructor()
-        order_feed.place_order(driver)
+        main_page.place_order()
         order_feed.wait_overlay_disappear()
         order_feed.click_hide_button()
 
@@ -66,12 +70,14 @@ class TestOrderFeed:
         assert counter_before - counter_after == 1
 
     @allure.title('Тест Номер заказа появляется в списке В процессе')
-    def test_order_number_appear_in_list_in_process(self, driver, user_method, generate_user_data):
+    def test_order_number_appear_in_list_in_process(self, driver, generate_user_data):
         order_feed = OrderFeedPage(driver)
+        pers_acc = PersonalAcc(driver)
+        main_page = MainPage(driver)
         with allure.step("Создаем пользователя через API метод"):
-            user_method.create_user(generate_user_data[0])
-        order_feed.create_user_for_order(driver, generate_user_data[1], generate_user_data[2])
-        order_feed.place_order(driver)
+            UserMethods.create_user(generate_user_data[0])
+        pers_acc.create_user_for_order(generate_user_data[1], generate_user_data[2])
+        main_page.place_order()
         order_feed.wait_overlay_disappear()
         number_order = f'0{order_feed.get_order_number()}'
         order_feed.click_hide_button()

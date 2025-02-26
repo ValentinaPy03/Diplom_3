@@ -1,7 +1,6 @@
 from data import Url
 import pytest
 from selenium import webdriver
-import requests
 from generators import generate_user_body
 from methods.user_methods import UserMethods
 
@@ -19,9 +18,7 @@ def driver(request):
     yield driver
     driver.quit()
 
-@pytest.fixture()
-def user_method():
-    return UserMethods
+
 
 @pytest.fixture()
 def generate_user_data():
@@ -30,6 +27,6 @@ def generate_user_data():
     password = user_data['password']
     name = user_data['name']
     yield [user_data, email, password, name]
-    user_token = UserMethods().user_token_by_user_data(email, password, name)
-    UserMethods().delete_user(user_token)
+    user_token = UserMethods.user_token_by_user_data(email, password, name)
+    UserMethods.delete_user(user_token)
 
